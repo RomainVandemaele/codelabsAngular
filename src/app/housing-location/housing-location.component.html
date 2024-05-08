@@ -6,4 +6,5 @@
     />
     <h2 class="listing-heading">{{ housingLocation.name }}</h2>
     <p class="listing-location"> <img ngSrc="assets/location-pin.svg" alt="pin logo" height="27" width="27">{{ housingLocation.city }}, {{ housingLocation.state }}</p>
+    <a [routerLink]="['/details',housingLocation.id]">Learn more</a>
 </section>
