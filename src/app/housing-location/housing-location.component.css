@@ -1,4 +1,6 @@
 .listing {
+    --primary-color: #9090dd;
+    --accent-color : #e8e7fb;
     background: var(--accent-color);
     border-radius: 30px;
     padding-bottom: 30px;
