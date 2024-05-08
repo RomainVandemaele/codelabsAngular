@@ -16,9 +16,15 @@ export class HomeComponent {
   filteredHousingLocationList: HousingLocation[] = [];
   housingService: HousingService = inject(HousingService);
 
-  constructor() {
-    this.housingLocationList = this.housingService.getAllHousingLocations();
-    this.filteredHousingLocationList = this.housingLocationList;
+  constructor() {}
+
+  ngOnInit() {
+    this.housingService
+        .getAllHousingLocations()
+        .then(housingLocationList => {
+          this.housingLocationList = housingLocationList;
+          this.filteredHousingLocationList = housingLocationList;
+        });
   }
 
   filterResult( text: string) {

@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import {HousingLocation} from "./housinglocation";
+import {HttpClient} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
 })
 export class HousingService {
+  private url = 'http://localhost:3000/locations'
+  private readonly baseUrl = "../assets/";
 
-  private readonly placeHolderPhoto = "../assets/example-house.jpg";
-
-  private housingLocationList: HousingLocation[] = [
+  /*private housingLocationList: HousingLocation[] = [
     {
       id: 0,
       name: 'Acme Fresh Start Housing',
@@ -109,19 +110,23 @@ export class HousingService {
       wifi: true,
       laundry: true,
     },
-  ];
+  ];*/
 
   constructor() { }
 
-  getAllHousingLocations(): HousingLocation[] {
-    return this.housingLocationList;
+  async getAllHousingLocations(): Promise<HousingLocation[]> {
+    //HttpClient for more complex request ?
+    const data = await fetch(this.url);
+    return (await data.json()) ?? [];
   }
 
-  getHousingLocationById(id: number): HousingLocation | undefined {
-    return this.housingLocationList.find(houseLocation => houseLocation.id === id);
+  async getHousingLocationById(id: number): Promise<HousingLocation | undefined> {
+    const data = await fetch(`${this.url}/${id}`);
+    return (await data.json()) ?? {};
   }
 
   submitApplication(firstName: string, lastName: string, email: string) {
+    // tslint:disable-next-line
     console.log(`Homes application received: by ${firstName} ${lastName} with email ${email}`);
   }
 }
